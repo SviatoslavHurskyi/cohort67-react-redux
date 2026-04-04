@@ -1,14 +1,16 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
 
-import {counterSlice} from "store/redux/counterSlice/counterSlice"
-import { employeeSlice } from "lessons/Employee_Project/employeeSlice/employeesSlice"
+// * Импортируем заранее созданный counterSlice - кусочки
+import {counterSlice} from "store/redux/counterSlice/counterSlice";
 // import {feedbackSlice} from "store/redux/feedbackSlice/feedbackSlice"
-
+import { employeeSlice } from "../Employee_Project/employeeSlice/employeesSlice"; 
+// import {profileSlice}
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice, employeeSlice) //feedbackSlice)
+// Функция combineSlices - идет из библитеки redax - это функция у нас собирает все кусочки и кладёт их в общее redax хранилище - куда класть в качестве аргументов
+const rootReducer = combineSlices(counterSlice, employeeSlice)
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>
 
@@ -19,7 +21,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     reducer: rootReducer,
     preloadedState,
   })
- 
+
   return store
 }
 
